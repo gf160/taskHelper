@@ -6,14 +6,23 @@ import excelUtil
 logger = log.setLogging("main")
 
 def excelMerge():
-    excelUtil.beforeFolderMerge()
-    excelUtil.afterFolderMerge()
-    resultText.insert(END, '엑셀파일이 만들어졌습니다.\n /excel_result/ 폴더를 확인해주세요\n')
+    bFlag = excelUtil.beforeFolderMerge()
+    if bFlag :
+        # 파일이 정상적으로 생성됨
+        resultText.insert(END, '/excel_result/excel_before.xlsx 파일이 생성되었습니다.\n')
+    else :
+        resultText.insert(END, 'excel_before 폴더가 비어있습니다.\n')
+
+    aFlag = excelUtil.afterFolderMerge()
+    if aFlag :
+        resultText.insert(END, '/excel_result/excel_after.xlsx 파일이 생성되었습니다.\n')
+    else :
+        resultText.insert(END, 'excel_after 폴더가 비어있습니다.\n')
 
 
 root = Tk()
 root.title("업무 자동화 시스템")
-root.geometry("300x300")
+root.geometry("400x300")
 root.resizable(False, False)
 
 excelMergeBtn = Button(root, text="엑셀 합치기", command=excelMerge)

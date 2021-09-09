@@ -11,6 +11,7 @@ def beforeFolderMerge():
 
     if len(beforeFileList) == 0:
         logger.warn("excel_before Folder is empty")
+        return False
     else:
         allBeforeData = pd.DataFrame()
         index = 0
@@ -26,12 +27,14 @@ def beforeFolderMerge():
         allBeforeData.to_excel('./excel_result/before_result_' + timeStr + '.xlsx', index=False)
 
         logger.info("Before Files Merge Complete")
+        return True
 
 def afterFolderMerge():
     afterFileList = os.listdir('./excel_after')
 
     if len(afterFileList) == 0:
         logger.warn("excel_after Folder is empty")
+        return False
     else:
         allAfterData = pd.DataFrame()
         index = 0
@@ -47,3 +50,4 @@ def afterFolderMerge():
         allAfterData.to_excel('./excel_result/after_result_' + timeStr + '.xlsx', index=False)
 
         logger.info("After Files Merge Complete")
+        return True
