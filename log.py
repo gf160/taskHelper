@@ -1,6 +1,16 @@
 import logging
+import os
+
 
 def setLogging(_logName="log"):
+
+    # log 파일이 없으면 생성한다.
+    try:
+        os.makedirs('./log')
+    except OSError:
+        if not os.path.isdir('./log'):
+            raise
+
     logger = logging.getLogger(_logName)
     logger.setLevel(logging.INFO)
 
